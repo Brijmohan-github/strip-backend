@@ -60,6 +60,7 @@ post '/register_reader' do
     return log_info(validationError)
   end
 
+ 
   begin
     reader = Stripe::Terminal::Reader.create(
       :registration_code => params[:registration_code],
@@ -70,6 +71,9 @@ post '/register_reader' do
     status 402
     return log_info("Error registering reader! #{e.message}")
   end
+
+  puts "Brij /register_reader - Reader registered: #{reader.id}"
+
 
   log_info("Reader registered: #{reader.id}")
 
@@ -121,7 +125,6 @@ post '/create_payment_intent' do
     status 400
     return log_info(validationError)
   end
-
   begin
     payment_intent = Stripe::PaymentIntent.create(
       :payment_method_types => params[:payment_method_types] || ['card_present'],
@@ -136,6 +139,8 @@ post '/create_payment_intent' do
     status 402
     return log_info("Error creating PaymentIntent! #{e.message}")
   end
+  
+  puts "Brij /create_payment_intent - PaymentIntent successfully created: #{payment_intent.id}"
 
   log_info("PaymentIntent successfully created: #{payment_intent.id}")
   status 200
@@ -156,6 +161,8 @@ post '/capture_payment_intent' do
     status 402
     return log_info("Error capturing PaymentIntent! #{e.message}")
   end
+  
+  puts "Brij /capture_payment_intent - PaymentIntent successfully captured: #{id}"
 
   log_info("PaymentIntent successfully captured: #{id}")
   # Optionally reconcile the PaymentIntent with your internal order system.
@@ -173,6 +180,8 @@ post '/cancel_payment_intent' do
     status 402
     return log_info("Error canceling PaymentIntent! #{e.message}")
   end
+
+  puts "Brij /capture_payment_intent - PaymentIntent successfully captured: #{id}"
 
   log_info("PaymentIntent successfully canceled: #{id}")
   # Optionally reconcile the PaymentIntent with your internal order system.
@@ -213,6 +222,8 @@ post '/create_setup_intent' do
     return log_info("Error creating SetupIntent! #{e.message}")
   end
 
+  puts "Brij /create_setup_intent - SetupIntent successfully created: #{setup_intent.id}")
+
   log_info("SetupIntent successfully created: #{setup_intent.id}")
   status 200
   return {:intent => setup_intent.id, :secret => setup_intent.client_secret}.to_json
@@ -252,6 +263,9 @@ post '/attach_payment_method_to_customer' do
     return log_info("Error attaching PaymentMethod to Customer! #{e.message}")
   end
 
+  puts "Brij /attach_payment_method_to_customer - Attached PaymentMethod to Customer: #{customer.id}")
+
+
   log_info("Attached PaymentMethod to Customer: #{customer.id}")
 
   status 200
@@ -282,6 +296,9 @@ post '/update_payment_intent' do
       update_params
     )
 
+    puts "Brij /update_payment_intent - Updated PaymentIntent #{payment_intent_id}")
+
+  
     log_info("Updated PaymentIntent #{payment_intent_id}")
   rescue Stripe::StripeError => e
     status 402
@@ -312,6 +329,9 @@ get '/list_locations' do
     return log_info("Error fetching Locations! #{e.message}")
   end
 
+  puts "Brij /list_locations - #{locations.data.size} Locations successfully fetched")
+
+
   log_info("#{locations.data.size} Locations successfully fetched")
 
   status 200
@@ -337,6 +357,8 @@ post '/create_location' do
     status 402
     return log_info("Error creating Location! #{e.message}")
   end
+
+  puts "Brij /create_location - Location successfully created: #{location.id}")
 
   log_info("Location successfully created: #{location.id}")
 
