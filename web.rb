@@ -222,7 +222,7 @@ post '/create_setup_intent' do
     return log_info("Error creating SetupIntent! #{e.message}")
   end
 
-  puts "Brij /create_setup_intent - SetupIntent successfully created: #{setup_intent.id}")
+  puts "Brij /create_setup_intent - SetupIntent successfully created: #{setup_intent.id}"
 
   log_info("SetupIntent successfully created: #{setup_intent.id}")
   status 200
@@ -263,7 +263,7 @@ post '/attach_payment_method_to_customer' do
     return log_info("Error attaching PaymentMethod to Customer! #{e.message}")
   end
 
-  puts "Brij /attach_payment_method_to_customer - Attached PaymentMethod to Customer: #{customer.id}")
+  puts "Brij /attach_payment_method_to_customer - Attached PaymentMethod to Customer: #{customer.id}"
 
 
   log_info("Attached PaymentMethod to Customer: #{customer.id}")
@@ -296,7 +296,7 @@ post '/update_payment_intent' do
       update_params
     )
 
-    puts "Brij /update_payment_intent - Updated PaymentIntent #{payment_intent_id}")
+    puts "Brij /update_payment_intent - Updated PaymentIntent #{payment_intent_id}"
 
   
     log_info("Updated PaymentIntent #{payment_intent_id}")
@@ -329,7 +329,7 @@ get '/list_locations' do
     return log_info("Error fetching Locations! #{e.message}")
   end
 
-  puts "Brij /list_locations - #{locations.data.size} Locations successfully fetched")
+  puts "Brij /list_locations - #{locations.data.size} Locations successfully fetched"
 
 
   log_info("#{locations.data.size} Locations successfully fetched")
@@ -358,7 +358,7 @@ post '/create_location' do
     return log_info("Error creating Location! #{e.message}")
   end
 
-  puts "Brij /create_location - Location successfully created: #{location.id}")
+  puts "Brij /create_location - Location successfully created: #{location.id}"
 
   log_info("Location successfully created: #{location.id}")
 
