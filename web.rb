@@ -26,7 +26,7 @@ Dotenv.load
 Stripe.api_key = ENV['STRIPE_ENV'] == 'production' ? ENV['STRIPE_SECRET_KEY'] : ENV['STRIPE_TEST_SECRET_KEY']
 Stripe.api_version = '2020-03-02'
 
-log_info("Brij Env : #{ENV['STRIPE_ENV']}")
+puts "Brij Env : #{ENV['STRIPE_ENV']}"
 
 def log_info(message)
   puts "\n" + message + "\n\n"
@@ -72,7 +72,7 @@ post '/register_reader' do
     return log_info("Error registering reader! #{e.message}")
   end
 
-  log_info("Brij /register_reader - Reader registered: #{reader.id}")
+  puts "Brij /register_reader - Reader registered: #{reader.id}"
 
 
   log_info("Reader registered: #{reader.id}")
@@ -140,7 +140,7 @@ post '/create_payment_intent' do
     return log_info("Error creating PaymentIntent! #{e.message}")
   end
   
-  log_info("Brij /create_payment_intent - PaymentIntent successfully created: #{payment_intent.id}")
+  puts "Brij /create_payment_intent - PaymentIntent successfully created: #{payment_intent.id}"
 
   log_info("PaymentIntent successfully created: #{payment_intent.id}")
   status 200
@@ -162,7 +162,7 @@ post '/capture_payment_intent' do
     return log_info("Error capturing PaymentIntent! #{e.message}")
   end
   
-  log_info("Brij /capture_payment_intent - PaymentIntent successfully captured: #{id}")
+  puts "Brij /capture_payment_intent - PaymentIntent successfully captured: #{id}"
 
   log_info("PaymentIntent successfully captured: #{id}")
   # Optionally reconcile the PaymentIntent with your internal order system.
@@ -181,7 +181,7 @@ post '/cancel_payment_intent' do
     return log_info("Error canceling PaymentIntent! #{e.message}")
   end
 
-  log_info("Brij /capture_payment_intent - PaymentIntent successfully captured: #{id}")
+  puts "Brij /capture_payment_intent - PaymentIntent successfully captured: #{id}"
 
   log_info("PaymentIntent successfully canceled: #{id}")
   # Optionally reconcile the PaymentIntent with your internal order system.
@@ -222,7 +222,7 @@ post '/create_setup_intent' do
     return log_info("Error creating SetupIntent! #{e.message}")
   end
 
-  log_info("Brij /create_setup_intent - SetupIntent successfully created: #{setup_intent.id}")
+  puts "Brij /create_setup_intent - SetupIntent successfully created: #{setup_intent.id}"
 
   log_info("SetupIntent successfully created: #{setup_intent.id}")
   status 200
@@ -263,7 +263,7 @@ post '/attach_payment_method_to_customer' do
     return log_info("Error attaching PaymentMethod to Customer! #{e.message}")
   end
 
-  log_info("Brij /attach_payment_method_to_customer - Attached PaymentMethod to Customer: #{customer.id}")
+  puts "Brij /attach_payment_method_to_customer - Attached PaymentMethod to Customer: #{customer.id}"
 
 
   log_info("Attached PaymentMethod to Customer: #{customer.id}")
@@ -296,7 +296,7 @@ post '/update_payment_intent' do
       update_params
     )
 
-    log_info("Brij /update_payment_intent - Updated PaymentIntent #{payment_intent_id}")
+    puts "Brij /update_payment_intent - Updated PaymentIntent #{payment_intent_id}"
 
   
     log_info("Updated PaymentIntent #{payment_intent_id}")
@@ -329,7 +329,7 @@ get '/list_locations' do
     return log_info("Error fetching Locations! #{e.message}")
   end
 
-  log_info("Brij /list_locations - #{locations.data.size} Locations successfully fetched")
+  puts "Brij /list_locations - #{locations.data.size} Locations successfully fetched"
 
 
   log_info("#{locations.data.size} Locations successfully fetched")
@@ -358,7 +358,7 @@ post '/create_location' do
     return log_info("Error creating Location! #{e.message}")
   end
 
-  log_info("Brij /create_location - Location successfully created: #{location.id}")
+  puts "Brij /create_location - Location successfully created: #{location.id}"
 
   log_info("Location successfully created: #{location.id}")
 
